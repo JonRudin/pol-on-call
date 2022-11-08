@@ -1,0 +1,23 @@
+name: Trigger engineer on call message to slack channel
+
+on:
+  schedule:
+    - cron: "01 08 * * *"
+  workflow_dispatch:
+
+jobs:
+  daily_schedule:
+    name: Find and send who is on call
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: bahmutov/npm-install@v1
+      - name: Send slack message
+        run: npm run start
+        env:
+          BACS_SCHEDULE_ID: ${{ secrets.BACS_SCHEDULE_ID }}
+          CARDS_SCHEDULE_ID: ${{ secrets.CARDS_SCHEDULE_ID }}
+          INBOUND_SCHEDULE_ID: ${{ secrets.INBOUND_SCHEDULE_ID }}
+          OPSGENIE_API_KEY: ${{ secrets.OPSGENIE_API_KEY }}
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
