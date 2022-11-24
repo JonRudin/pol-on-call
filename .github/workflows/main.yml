@@ -2,7 +2,7 @@ name: Trigger engineer on call message to slack channel
 
 on:
   schedule:
-    - cron: "01 09 * * *"
+    - cron: "01 09 * * 1-5"
   workflow_dispatch:
 
 jobs:
